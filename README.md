@@ -1,27 +1,115 @@
-# HelloAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+프론트엔드 웹 개발 환경의 변화에 따른 새로운(!) 기술... Node.js/NPM...
 
-## Development server
+TS... MS꺼... 자바스크립트 문법에 타입 정보를 추가하고, 코드를 안정적으로 수정하고 오류를 검사할 수 있는 기능을 넣은 것...
+자바스크립트 문법을 그대로 사용... (근데 자바스크립트를 잘 몰라. 기초 약해.)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- 타입 언어
 
-## Code scaffolding
+js 는 원시/기본 타입 5개와 객체... 동적프로그래밍 언어 유연/빠름 장점 그걸 C나 자바처럼...
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+var age: number;
+let name: string;
 
-## Build
+자바스크립트에 대체 타입 왜 추가함? 환경. (대규모의 코드 베이스로 만들어진 웹 애플리케이션, 서버 애플리케이션)
+요구 사항 변화에 따른 코드 변경과 리팩토링이 쉽지 않음. 그러나 타입 정보가 명시적으로 변수와 함수의 시그니처에 더해지면 IDE의 도움을 받을 수 있어 '코드 변경 시 오류를 탐지하기 쉽고, 리팩토링을 안전하게 할 수 있음.'
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+- 상위 언어
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+js 의 기능을 모두 담고 있는 언어...
+js -> ts
+변수 선언 또는 함수 인자 및 반환 타입 정보만 작성하면 됨.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- 열린 언어(MS는 타입스크립트를 오픈 소스로 공개... npm을 통해서 패키지로 손쉽게 설치할 수 있게 함...)
 
-## Further help
+npm install -g typescript 하고나면
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+tsc 명령 사용 가능...
+
+ts > js 로...
+
+tsc *.js --target es6
+
+ts 에서 접근제어자(public, private) 사용하니까 es6 에 constructor 적용됨... statice 도 되고...
+이건 아직 es6 문법을 다 안익혀서 음음... 패스;
+
+=====
+
+뭐 다음은... 에디터.. VS Code...
+
+플러그인 설치하는건 cmd + p 해서 뭐 그냥 설치할 수 있고...
+
+ext install vscode-icons ...
+
+
+다음은 전역 환경 타입스크립트를 VS Code 기본 컴파일러로 설정...
+
+settings.json 의 "typescript.tsdk"의 경로를 /usr/local/lib/node_modules/typescript/lib 로...
+
+=====
+
+Angular CLI 1.7.4 에서 갑자기 6.0.x 로... =ㅁ=)... 우선은 책 예제를 위하여 1.7.4 로...
+
+이제 좀 맞게 나오내...
+
+e2e - 애플리케이션 통합 테스트
+src - 실제 애플리케이션에 필요한 소스
+.angular-cli.json - angular-cli에서 사용할 설정 정보
+karma.conf.js - Karma라는 단위 테스트 도구의 설정 파일
+protractor.conf.js - e2e... 테스트를 실행하기 위한 도구의 설정 파일
+tslint.json - TS용 구문 체크 설정 파일
+tsconfig.json - TS 컴파일 설정 파일
+src/typings.d.ts - TS 용 타입 선언 정보 파일
+
+최신 버전이랑 좀 달라...
+
+=====
+
+ng serve - 로컬에서 개발 환경으로 실행하는 명령
+명령 실행 > 웹 서버를 실행 > Webpack 을 사용하여 소스를 번들링
+
+polyfills.ts ... 정말 잘 적용될까?
+
+ng test - 는... 일단 패스
+
+다만 설명하면서 나온 () => { ... } ... ES6 화살표 함수, 콜백처럼 명시적으로 이름이 필요하지 않은 함수를 간결하게 표현할 수 있도록 돕는 유용한 기능. 단순히 문법적 간결함만 주는건 아니긴 함...
+
+=====
+
+타입 선언 정보...
+
+자바스크립트 언어 명세에 없는 API의 타입 정보를 타입스크립트는 타입 선언 파일 이라는 형식으로 타입 정보만 추가로 내포하고 있음...
+
+ex. split 메서드의 반환 타입이 문자열이라는 정보가 어딘가에 기술되어 있음... 컴파일러나 에디터가 타입스크립트에 미리 만들어진 타입 선언 정보로부터 split 메서드의 반환 결과를 string[]으로 추론하여 string 타입인 w 와 number 타입의 sum 연산이 불가능함을 알려줌.
+
+split(separator: string, limit?: number): string[];
+
+d.ts 확장자를 가진 자바스크립트에는 없는 타입 선언 정보를 둠...
+기존의 자바스크립트 라이브러리를 사용하는 데 반드시 필요한 파일
+
+이런 맥락에서 필요한 패키지. 
+@types -> 타입 정보 없이 작성된 자바스크립트 라이브러리의 타입 정보를 관리하는 패키지
+
+패키지 안에 d.ts 를 넣는 추세지만,
+여전히 타입 정보가 없는 자바스크립트 라이브러리가 훨씬 더 많음.
+
+필요에 따라 types 패키지의 일부를 내려 받아서 컴파일 오류를 제거해야 함. (요즘도 그러나?)
+
+npm install --save-dev @types/(패키지명)
+
+package.json 의 devDependencies @types/jasmine, @types/node
+
+=====
+
+[2장 요약]
+
+- 앵귤러는 js에 타입 기능이 추가된 TS로 작성되었습니다.
+- 앵귤러는 js, 다트로도 개발할 수 있지만 이 책에서는 TS를 사용해 프레임워크를 설명
+- TS 의 주요한 특징, 타입을 가지고 있다. js 의 superset이면서 js의 여러 버전으로 변환할 수 있다.
+- 대부분의 IDE 나 에디터에서 지원하고 있으므로 바로 사용할 수 있음.
+- Hello, Angular 를 브라우저에서 실행해봄
+- 앵귤러 CLI (new, serve) 해봄... (serve 원리...)
+
+=====
