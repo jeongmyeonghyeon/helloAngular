@@ -105,7 +105,7 @@ package.json 의 devDependencies @types/jasmine, @types/node
 
 [2장 요약]
 
-- 앵귤러는 js에 타입 기능이 추가된 TS로 작성되었습니다.
+- 앵귤러는 js에 타입 기능이 추가된 TS로 작성.
 - 앵귤러는 js, 다트로도 개발할 수 있지만 이 책에서는 TS를 사용해 프레임워크를 설명
 - TS 의 주요한 특징, 타입을 가지고 있다. js 의 superset이면서 js의 여러 버전으로 변환할 수 있다.
 - 대부분의 IDE 나 에디터에서 지원하고 있으므로 바로 사용할 수 있음.
